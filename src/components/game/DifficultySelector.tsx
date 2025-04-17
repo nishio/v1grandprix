@@ -18,20 +18,14 @@ export function DifficultySelector({ onSelect }: DifficultySelectorProps) {
           className="w-full mb-2"
           variant="outline"
         >
-          簡単 (制限時間: 8秒 / ミス許容)
-        </Button>
-        <Button 
-          onClick={() => onSelect('normal')} 
-          className="w-full mb-2"
-        >
-          普通 (制限時間: 5秒 / 1ミスでゲームオーバー)
+          簡単 (どの言い訳を選んでも続行できます)
         </Button>
         <Button 
           onClick={() => onSelect('hard')} 
           className="w-full"
           variant="destructive"
         >
-          難しい (制限時間: 3秒 / 1ミスでゲームオーバー)
+          難しい (低得点の言い訳を選ぶと即終了です！)
         </Button>
       </CardContent>
     </Card>

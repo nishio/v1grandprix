@@ -1,26 +1,21 @@
-export type Difficulty = 'easy' | 'normal' | 'hard';
+export type Difficulty = 'easy' | 'hard';
 
 export interface DifficultySettings {
   timeLimit: number; // 秒単位
   penaltyForWrongAnswer: boolean;
-  pointsMultiplier: number;
+  penaltyForLowScoreOptions: boolean; // 低得点の選択肢を選んだときにゲームオーバーにするかどうか
 }
 
 export const difficultySettings: Record<Difficulty, DifficultySettings> = {
   easy: {
-    timeLimit: 8,
-    penaltyForWrongAnswer: false,
-    pointsMultiplier: 1,
-  },
-  normal: {
     timeLimit: 5,
-    penaltyForWrongAnswer: true,
-    pointsMultiplier: 1.5,
+    penaltyForWrongAnswer: false,
+    penaltyForLowScoreOptions: false,
   },
   hard: {
-    timeLimit: 3,
-    penaltyForWrongAnswer: true,
-    pointsMultiplier: 2,
+    timeLimit: 5,
+    penaltyForWrongAnswer: false, // 高得点以外を選んでもゲームオーバーにしない
+    penaltyForLowScoreOptions: true, // 低得点の2つの選択肢を選ぶと即座にゲームオーバー
   },
 };
 

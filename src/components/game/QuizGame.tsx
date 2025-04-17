@@ -44,19 +44,19 @@ export function QuizGame({ onGameEnd }: QuizGameProps) {
     if (!currentQuestion) return;
 
     const selectedOption = currentQuestion.options[optionIndex];
-    
+
     const sortedOptionIndices = [...currentQuestion.options]
       .map((option, index) => ({ option, index }))
       .sort((a, b) => a.option.points - b.option.points)
       .map(item => item.index);
-    
+
     const lowestTwoIndices = sortedOptionIndices.slice(0, 2);
-    
+
     if (optionIndex === currentQuestion.correctOptionIndex) {
       // 正解 - 点数を加算
       const pointsEarned = selectedOption.points;
       setScore(score + pointsEarned);
-      
+
       // 次の問題へ
       if (currentQuestionIndex < questions.length - 1) {
         setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -119,9 +119,9 @@ export function QuizGame({ onGameEnd }: QuizGameProps) {
           <CardTitle className="text-2xl text-center">失言言い訳ゲーム</CardTitle>
         </CardHeader>
         <CardContent className="text-center">
-          <p className="mb-4">あなたはプレイヤーコメンテーターです。</p>
+          <p className="mb-4">あなたは政治家です。</p>
           <p className="mb-4">炎上発言に対する言い訳を選んでください！</p>
-          <p className="mb-4">最も高得点の言い訳を選ぶとスコアが加算されます。</p>
+          <p className="mb-4">高得点の言い訳を選ぶとスコアが加算されます。</p>
           {settings?.penaltyForLowScoreOptions ? (
             <p className="mb-4 text-red-500">最も低い点数の2つの言い訳を選ぶと即終了です！</p>
           ) : (
@@ -152,16 +152,16 @@ export function QuizGame({ onGameEnd }: QuizGameProps) {
     <Card className="w-full max-w-md">
       <CardHeader>
         <CardTitle className="text-xl text-center">
-          問題 {currentQuestionIndex + 1}/{questions.length} 
+          問題 {currentQuestionIndex + 1}/{questions.length}
           <span className="text-sm ml-2">
             難易度: {difficulty === 'easy' ? '簡単' : '難しい'}
           </span>
         </CardTitle>
         <div className="mt-2">
-          <Timer 
-            duration={5} 
-            onTimeUp={handleTimeUp} 
-            isActive={true} 
+          <Timer
+            duration={5}
+            onTimeUp={handleTimeUp}
+            isActive={true}
           />
         </div>
       </CardHeader>

@@ -43,10 +43,18 @@ export function QuizGame({ onGameEnd }: QuizGameProps) {
   const handleOptionClick = (optionIndex: number) => {
     if (!currentQuestion) return;
 
+    const selectedOption = currentQuestion.options[optionIndex];
+    
+    const sortedOptionIndices = [...currentQuestion.options]
+      .map((option, index) => ({ option, index }))
+      .sort((a, b) => a.option.points - b.option.points)
+      .map(item => item.index);
+    
+    const lowestTwoIndices = sortedOptionIndices.slice(0, 2);
+    
     if (optionIndex === currentQuestion.correctOptionIndex) {
       // 正解 - 点数を加算
-      const pointsMultiplier = settings?.pointsMultiplier || 1;
-      const pointsEarned = currentQuestion.options[optionIndex].points * pointsMultiplier;
+      const pointsEarned = selectedOption.points;
       setScore(score + pointsEarned);
       
       // 次の問題へ
@@ -58,11 +66,10 @@ export function QuizGame({ onGameEnd }: QuizGameProps) {
       }
     } else {
       // 不正解
-      if (settings?.penaltyForWrongAnswer) {
-        // ゲーム終了
+      if (settings?.penaltyForLowScoreOptions && lowestTwoIndices.includes(optionIndex)) {
         setGameOver(true);
       } else {
-        // 次の問題へ（簡単モードではミスしても続行）
+        // 次の問題へ
         if (currentQuestionIndex < questions.length - 1) {
           setCurrentQuestionIndex(currentQuestionIndex + 1);
         } else {
@@ -109,18 +116,18 @@ export function QuizGame({ onGameEnd }: QuizGameProps) {
     return (
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="text-2xl text-center">プレイヤーコメンテーターゲーム</CardTitle>
+          <CardTitle className="text-2xl text-center">失言言い訳ゲーム</CardTitle>
         </CardHeader>
         <CardContent className="text-center">
           <p className="mb-4">あなたはプレイヤーコメンテーターです。</p>
           <p className="mb-4">炎上発言に対する言い訳を選んでください！</p>
           <p className="mb-4">最も高得点の言い訳を選ぶとスコアが加算されます。</p>
-          {settings?.penaltyForWrongAnswer ? (
-            <p className="mb-4 text-red-500">最高得点以外の言い訳を選ぶと即終了です！</p>
+          {settings?.penaltyForLowScoreOptions ? (
+            <p className="mb-4 text-red-500">最も低い点数の2つの言い訳を選ぶと即終了です！</p>
           ) : (
-            <p className="mb-4 text-green-500">最高得点以外の言い訳を選んでも次の問題に進めます。</p>
+            <p className="mb-4 text-green-500">どの言い訳を選んでも次の問題に進めます。</p>
           )}
-          <p className="text-sm text-gray-500">制限時間内に回答してください。</p>
+          <p className="text-sm text-gray-500">制限時間は5秒です。</p>
         </CardContent>
         <CardFooter className="flex justify-center">
           <Button onClick={() => setGameStarted(true)} className="w-full">
@@ -147,12 +154,12 @@ export function QuizGame({ onGameEnd }: QuizGameProps) {
         <CardTitle className="text-xl text-center">
           問題 {currentQuestionIndex + 1}/{questions.length} 
           <span className="text-sm ml-2">
-            難易度: {difficulty === 'easy' ? '簡単' : difficulty === 'normal' ? '普通' : '難しい'}
+            難易度: {difficulty === 'easy' ? '簡単' : '難しい'}
           </span>
         </CardTitle>
         <div className="mt-2">
           <Timer 
-            duration={settings?.timeLimit || 5} 
+            duration={5} 
             onTimeUp={handleTimeUp} 
             isActive={true} 
           />

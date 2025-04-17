@@ -96,14 +96,14 @@ function App() {
       <Card className="w-[350px]">
         <CardHeader>
           <CardTitle className="text-2xl text-center">V1グランプリ</CardTitle>
-          <CardDescription className="text-center">プレイヤーコメンテーターゲーム</CardDescription>
+          <CardDescription className="text-center">失言言い訳ゲーム</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="text-center">
             <p className="mb-4">ようこそ！</p>
-            <p className="mb-2">あなたはプレイヤーコメンテーターとして、炎上発言に対する言い訳を選ぶ必要があります。</p>
+            <p className="mb-2">あなたはプレイヤーコメンテーターとして、炎上発言に対する最も説得力のある言い訳を選ぶ必要があります。</p>
             <p className="mb-2">最も高得点の言い訳を選びましょう！</p>
-            <p className="mb-4">難易度に応じて制限時間が変わります。</p>
+            <p className="mb-4">制限時間は5秒です。素早く判断してください！</p>
             {highScore > 0 && (
               <p className="text-sm text-blue-600 font-bold mb-2">現在のハイスコア: {highScore}</p>
             )}

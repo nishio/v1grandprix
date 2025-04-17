@@ -159,6 +159,7 @@ export function QuizGame({ onGameEnd }: QuizGameProps) {
         </CardTitle>
         <div className="mt-2">
           <Timer
+            key={`question-${currentQuestionIndex}`}
             duration={5}
             onTimeUp={handleTimeUp}
             isActive={true}

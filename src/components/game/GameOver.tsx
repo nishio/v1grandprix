@@ -8,7 +8,7 @@ interface GameOverProps {
   onRestart: () => void;
 }
 
-export function GameOver({ score, onRestart }: GameOverProps) {
+export function GameOver({ score, totalQuestions, onRestart }: GameOverProps) {
   const highScore = getHighScore();
   const isNewHighScore = score > highScore;
 

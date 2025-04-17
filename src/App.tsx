@@ -101,7 +101,7 @@ function App() {
         <CardContent>
           <div className="text-center">
             <p className="mb-4">ようこそ！</p>
-            <p className="mb-2">あなたはプレイヤーコメンテーターとして、炎上発言に対する最も説得力のある言い訳を選ぶ必要があります。</p>
+            <p className="mb-2">あなたは政治家として、炎上発言に対する最も説得力のある言い訳を選ぶ必要があります。</p>
             <p className="mb-2">最も高得点の言い訳を選びましょう！</p>
             <p className="mb-4">制限時間は5秒です。素早く判断してください！</p>
             {highScore > 0 && (

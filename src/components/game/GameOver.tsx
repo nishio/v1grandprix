@@ -18,7 +18,7 @@ export function GameOver({ score, onRestart }: GameOverProps) {
         <CardTitle className="text-2xl text-center">ゲーム終了</CardTitle>
       </CardHeader>
       <CardContent className="text-center">
-        <p className="text-lg mb-4">あなたのスコア: {score}</p>
+        <p className="text-lg mb-4">あなたのスコア: {score} / {totalQuestions}</p>
         <p className="mb-2">ハイスコア: {isNewHighScore ? score : highScore}</p>
         {isNewHighScore && <p className="text-yellow-500 font-bold mb-4">新記録達成！</p>}
         {score > 500 ? (
